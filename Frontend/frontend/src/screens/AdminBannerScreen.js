@@ -1,6 +1,7 @@
 import React, { useEffect, useState } from 'react';
 import axios from 'axios';
 import BannerItem from '../components/BannerItem';
+import { Container, Form, Button, Spinner, Alert } from 'react-bootstrap';
 
 function AdminBannerScreen() {
   const [banners, setBanners] = useState([]);
@@ -94,16 +95,16 @@ function AdminBannerScreen() {
     },
   };
 
-  if (loading) return <div>Loading banners...</div>;
-  if (error) return <div>{error}</div>;
+  if (loading) return <Spinner animation="border" />;
+  if (error) return <Alert variant="danger">{error}</Alert>;
 
   return (
-    <div style={styles.container}>
+    <Container style={styles.container}>
       <h2>Manage Banners</h2>
-      <form onSubmit={handleSubmit} style={styles.form}>
-        <div>
-          <label style={styles.label}>Title:</label>
-          <input
+      <Form onSubmit={handleSubmit} style={styles.form}>
+        <Form.Group>
+          <Form.Label style={styles.label}>Title:</Form.Label>
+          <Form.Control
             type="text"
             name="title"
             value={newBanner.title}
@@ -111,10 +112,10 @@ function AdminBannerScreen() {
             required
             style={styles.input}
           />
-        </div>
-        <div>
-          <label style={styles.label}>Image URL:</label>
-          <input
+        </Form.Group>
+        <Form.Group>
+          <Form.Label style={styles.label}>Image URL:</Form.Label>
+          <Form.Control
             type="text"
             name="image"
             value={newBanner.image}
@@ -122,28 +123,28 @@ function AdminBannerScreen() {
             required
             style={styles.input}
           />
-        </div>
-        <div>
-          <label style={styles.label}>Active:</label>
-          <input
+        </Form.Group>
+        <Form.Group>
+          <Form.Check
             type="checkbox"
             name="active"
+            label="Active"
             checked={newBanner.active}
             onChange={(e) => setNewBanner({ ...newBanner, active: e.target.checked })}
           />
-        </div>
-        <div>
-          <label style={styles.label}>Expiry Date:</label>
-          <input
+        </Form.Group>
+        <Form.Group>
+          <Form.Label style={styles.label}>Expiry Date:</Form.Label>
+          <Form.Control
             type="date"
             name="expiryDate"
             value={newBanner.expiryDate}
             onChange={handleChange}
             style={styles.input}
           />
-        </div>
-        <button type="submit" style={styles.button}>Add Banner</button>
-      </form>
+        </Form.Group>
+        <Button type="submit" style={styles.button}>Add Banner</Button>
+      </Form>
 
       <div style={styles.bannerList}>
         {banners.length === 0 ? (
@@ -154,7 +155,7 @@ function AdminBannerScreen() {
           ))
         )}
       </div>
-    </div>
+    </Container>
   );
 }
 

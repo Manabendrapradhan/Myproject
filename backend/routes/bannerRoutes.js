@@ -1,5 +1,5 @@
 import express from 'express';
-import Banner from '../models/Banner.js';
+import Banner from '../models/banner.js';
 
 const bannerRouter = express.Router();
 

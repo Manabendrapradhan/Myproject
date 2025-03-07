@@ -9,17 +9,14 @@ import { isAuth, isAdmin, payOrderEmailTemplate } from '../utils.js';
 const orderRouter = express.Router();
 
 const transporter = nodemailer.createTransport({
-  host: 'smtp.elasticemail.com', 
-  port: 2525, 
-  secure: false, 
+  host: 'smtp.elasticemail.com',
+  port: 2525,
+  secure: false,
   auth: {
-    user: 'gargaditya674@gmail.com', 
-    pass: '71A8EF81ED5E6F1F29EAD3ED1600CDC6F37E', 
+    user: 'gargaditya674@gmail.com',
+    pass: '71A8EF81ED5E6F1F29EAD3ED1600CDC6F37E',
   },
 });
-
-
-
 
 orderRouter.get(
   '/',
